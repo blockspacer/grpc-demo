@@ -4,6 +4,6 @@ load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 cc_binary(
     name = "server",
-    srcs = ["src/server.cpp"],
+    srcs = ["server.cpp"],
     deps = [],
 )
