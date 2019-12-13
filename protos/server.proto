@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+// request
+message CheckLoginRequest {
+  option ts = 0;
+}
+
+// response
+message CheckLoginResponse {
+  uint32 retCode;
+  uint32 uid;
+}
