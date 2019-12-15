@@ -29,4 +29,5 @@ https://github.com/stackb/rules_proto
 由于新版本的grpc，把一些插件移动了位置，导致rules_proto依赖寻找报错，已有网友提交pr修复，目前未被合并，
 故无法使用新版本的rules_proto对proto文件进行编译，详情：https://github.com/stackb/rules_proto/issues/108
 
-### 查阅官方文档，从一个很不起眼的QA找到bazel给官方提的issue，顺藤摸瓜
+### grpc官方支持
+查阅bazel官方文档，从一个很不起眼的QA找到bazel给grpc官方提的issue，顺藤摸瓜找到grpc官方提供的proto编译插件
