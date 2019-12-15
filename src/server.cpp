@@ -4,7 +4,7 @@
 
 #include <grpc++/grpc++.h>
 
-#include "protos/server.pb.h"
+#include "protos/server.grpc.pb.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -12,21 +12,22 @@ using grpc::ServerContext;
 using grpc::Status;
 using UserAgent::CheckLoginRequest;
 using UserAgent::CheckLoginResponse;
-using UserAgent::Agent;
+using UserAgent::UserServer;
 
 // Logic and data behind the server's behavior.
-/*class GreeterServiceImpl final : public Greeter::Service {
-    Status SayHello(ServerContext* context, const HelloRequest* request,
-                    HelloReply* reply) override {
+class UserServerServiceImpl final : public UserServer::Service {
+    Status CheckLogin(ServerContext* context, const CheckLoginRequest* request,
+                      CheckLoginResponse* reply) override {
         std::string prefix("Hello ");
-        reply->set_message(prefix + request->name());
+        reply->set_retcode(0);
+        reply->set_uid(1000);
         return Status::OK;
     }
 };
 
 void RunServer() {
     std::string server_address("0.0.0.0:50051");
-    GreeterServiceImpl service;
+    UserServerServiceImpl service;
 
     ServerBuilder builder;
     // Listen on the given address without any authentication mechanism.
@@ -41,10 +42,10 @@ void RunServer() {
     // Wait for the server to shutdown. Note that some other thread must be
     // responsible for shutting down the server for this call to ever return.
     server->Wait();
-}*/
+}
 
 int main(int argc, char** argv) {
-//    RunServer();
+    RunServer();
 
     return 0;
 }

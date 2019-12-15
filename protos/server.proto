@@ -3,7 +3,7 @@ syntax = "proto3";
 package UserAgent;
 
 // UserLog Service
-service FuckYouService {
+service UserServer {
   rpc CheckLogin (CheckLoginRequest) returns (CheckLoginResponse) {}
 }
 
