@@ -1,12 +1,19 @@
 syntax = "proto3";
 
+package UserAgent;
+
+// UserLog Service
+service FuckYouService {
+  rpc CheckLogin (CheckLoginRequest) returns (CheckLoginResponse) {}
+}
+
 // request
 message CheckLoginRequest {
-  option ts = 0;
+  string ts = 1;
 }
 
 // response
 message CheckLoginResponse {
-  uint32 retCode;
-  uint32 uid;
+  uint32 retCode = 1;
+  uint32 uid = 2;
 }
