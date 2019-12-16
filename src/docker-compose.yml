@@ -1,8 +1,29 @@
 version: '3'
 services:
+  common:
+    build:
+      context: ./
+      dockerfile: ./docker/common/Dockerfile
+    image: grpcweb/common
   server:
-    build: ./docker/server
+    build:
+      context: ./
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - "9090:9090"
   envoy:
-    build: ./docker/envoy
+    build:
+      context: ./
+      dockerfile: ./docker/envoy/Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - server
   client:
-    build: ./docker/client
+    build:
+      context: ./
+      dockerfile: ./docker/client/Dockerfile
+    depends_on:
+      - common
+    ports:
+      - "8081:8081"
