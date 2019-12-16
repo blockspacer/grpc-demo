@@ -16,5 +16,5 @@ cc_grpc_library(
     srcs = [":server_proto_lib"],
     grpc_only = True,
     deps = [":server_cc_proto_lib"],
-    visibility = ["//src:__pkg__"]
+    visibility = ["//src/server:__pkg__"]
 )

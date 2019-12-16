@@ -5,6 +5,6 @@ cc_binary(
     srcs = ["server.cpp"],
     deps = [
         "@com_github_grpc_grpc//:grpc++",
-        "//protos:server_grpc_lib"
+        "//src/protos:server_grpc_lib"
     ],
 )

@@ -4,7 +4,7 @@
 
 #include <grpc++/grpc++.h>
 
-#include "protos/server.grpc.pb.h"
+#include "src/protos/server.grpc.pb.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
