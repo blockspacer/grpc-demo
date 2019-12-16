@@ -2,8 +2,6 @@ FROM grpcweb/common
 
 WORKDIR /github/grpc-demo/src/protos
 
-RUN ls /github/grpc-demo/src
-
 RUN protoc -I=. server.proto \
 --js_out=import_style=commonjs:. \
 --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.
