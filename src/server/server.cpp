@@ -26,7 +26,7 @@ class UserServerServiceImpl final : public UserServer::Service {
 };
 
 void RunServer() {
-    std::string server_address("0.0.0.0:50051");
+    std::string server_address("0.0.0.0:9090");
     UserServerServiceImpl service;
 
     ServerBuilder builder;

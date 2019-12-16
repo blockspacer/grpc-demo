@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-button type="primary">注册</el-button>
+    <el-tabs v-model="activeTab" @tab-click="changeTab">
+      <el-tab-pane label="tab1" name="first"><Login session-id="0"></Login></el-tab-pane>
+      <el-tab-pane label="tab2" name="second"><Login session-id="1"></Login></el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import Login from './components/login.vue';
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    components: {
+      Login
+    },
+    data() {
+      return {
+        activeTab: 'first'
+      }
+    },
+    methods: {
+      changeTab() {
+
+      }
+    }
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

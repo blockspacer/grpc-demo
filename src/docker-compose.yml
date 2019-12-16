@@ -1,0 +1,8 @@
+version: '3'
+services:
+  server:
+    build: ./docker/server
+  envoy:
+    build: ./docker/envoy
+  client:
+    build: ./docker/client
