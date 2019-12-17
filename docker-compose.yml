@@ -19,8 +19,8 @@ services:
       dockerfile: ./docker/envoy/Dockerfile
     ports:
       - "8080:8080"
-    links:
-      - server
+#    links:
+#      - server
   client:
     build:
       context: ./

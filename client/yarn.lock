@@ -3716,10 +3716,20 @@ globby@^9.2.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
+google-protobuf@^3.11.2:
+  version "3.11.2"
+  resolved "http://r.tnpm.oa.com/google-protobuf/download/google-protobuf-3.11.2.tgz#43272974521a5cec35a21f62730cf517a5a8e38c"
+  integrity sha1-QycpdFIaXOw1oh9icwz1F6Wo44w=
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.2:
   version "4.2.3"
   resolved "http://r.tnpm.oa.com/graceful-fs/download/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha1-ShL/G2A3bvCYYsIJPt2Qgyi+hCM=
+
+grpc-web@^1.0.7:
+  version "1.0.7"
+  resolved "http://r.tnpm.oa.com/grpc-web/download/grpc-web-1.0.7.tgz#9e4fbcf63d3734515332ab59e42baa7d0d290015"
+  integrity sha1-nk+89j03NFFTMqtZ5CuqfQ0pABU=
 
 gzip-size@^5.0.0:
   version "5.1.1"
