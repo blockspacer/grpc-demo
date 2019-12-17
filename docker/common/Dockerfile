@@ -13,9 +13,3 @@ protoc-3.8.0-linux-x86_64.zip -o protoc.zip && \
 RUN curl -sSL https://github.com/grpc/grpc-web/releases/download/1.0.7/\
 protoc-gen-grpc-web-1.0.7-linux-x86_64 -o /usr/local/bin/protoc-gen-grpc-web && \
   chmod +x /usr/local/bin/protoc-gen-grpc-web
-
-WORKDIR /var/www/html/dist
-
-WORKDIR /github/grpc-demo
-
-RUN git clone https://github.com/Calvin-cn/grpc-demo.git .

@@ -11,6 +11,8 @@ services:
       dockerfile: ./docker/server/Dockerfile
     ports:
       - "9090:9090"
+    volumes:
+      - ./:/code/grpc-demo/
   envoy:
     build:
       context: ./
@@ -27,3 +29,10 @@ services:
       - common
     ports:
       - "8081:8081"
+    volumes:
+      - ./protos:/code/grpc-demo/protos
+      - ./client/public:/code/grpc-demo/client/public
+      - ./client/src/:/code/grpc-demo/client/src
+      - ./client/package.json:/code/grpc-demo/client/package.json
+      - ./client/vue.config.js:/code/grpc-demo/client/vue.config.js
+      - ./client/babel.config.js:/code/grpc-demo/client/babel.config.js
