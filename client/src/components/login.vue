@@ -27,8 +27,9 @@
       };
     },
     methods: {
-      login() {
-        Api.checkLogin();
+      async login() {
+        const ret = await Api.checkLogin();
+        console.log(ret);
       }
     }
   }

@@ -1,13 +1,17 @@
 FROM insready/bazel
 
-RUN apt-get -y update && apt-get upgrade -y bazel
+EXPOSE 9090
+
+RUN apt-get -y update &&\
+    apt-get upgrade -y bazel &&\
+    apt install libmysqlcppconn-dev
 
 ADD . /code/grpc-demo
 
 WORKDIR /code/grpc-demo
 
+# 把依赖库都安装了
 RUN bazel build //server:server
 
-EXPOSE 9090
-
-CMD ./bazel-bin/server/server
+# 运行时编译
+CMD bazel run //server:server

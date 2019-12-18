@@ -3,17 +3,54 @@ syntax = "proto3";
 package UserAgent;
 
 // UserLog Service
-service UserServer {
+service UserService {
+  rpc Login (LoginRequest) returns (LoginResponse) {}
   rpc CheckLogin (CheckLoginRequest) returns (CheckLoginResponse) {}
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
 }
 
+// =========================
+// Login
+// request
+message LoginRequest {
+  string user = 1;
+  string password = 2;
+  string channel = 3;
+}
+
+// response
+message LoginResponse {
+  uint32 ret_code = 1;
+  uint32 uid = 2;
+  string token = 3;
+}
+// =========================
+
+// =========================
+// CheckLogin
 // request
 message CheckLoginRequest {
-  string ts = 1;
+  string uid = 1;
+  string token = 2;
+  string channel = 3;
 }
 
 // response
 message CheckLoginResponse {
-  uint32 retCode = 1;
-  uint32 uid = 2;
+  uint32 ret_code = 1;
 }
+// =========================
+
+// =========================
+// Register
+// request
+message RegisterRequest {
+  string user = 1;
+  string password = 2;
+}
+
+// response
+message RegisterResponse {
+  uint32 ret_code = 1;
+}
+// =========================

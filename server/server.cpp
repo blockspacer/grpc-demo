@@ -10,19 +10,34 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+using UserAgent::LoginRequest;
+using UserAgent::LoginResponse;
 using UserAgent::CheckLoginRequest;
 using UserAgent::CheckLoginResponse;
-using UserAgent::UserServer;
+using UserAgent::RegisterRequest;
+using UserAgent::RegisterResponse;
+using UserAgent::UserService;
 
 // Logic and data behind the server's behavior.
-class UserServerServiceImpl final : public UserServer::Service {
-    Status CheckLogin(ServerContext* context, const CheckLoginRequest* request,
-                      CheckLoginResponse* reply) override {
-        std::string prefix("Hello ");
-        reply->set_retcode(0);
-        reply->set_uid(1000);
-        return Status::OK;
-    }
+class UserServerServiceImpl final : public UserService::Service {
+  Status Login(ServerContext *context, const LoginRequest *request,
+               LoginResponse *reply) override {
+    std::string user = request->user();
+    reply->set_ret_code(0);
+    reply->set_uid(1000);
+    reply->set_token(user);
+    return Status::OK;
+  }
+
+  Status CheckLogin(ServerContext *context, const CheckLoginRequest *request,
+                    CheckLoginResponse *reply) override {
+    return Status::OK;
+  }
+
+  Status Register(ServerContext *context, const RegisterRequest *request,
+                  RegisterResponse *reply) override {
+    return Status::OK;
+  }
 };
 
 void RunServer() {
