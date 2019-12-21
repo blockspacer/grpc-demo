@@ -4,7 +4,7 @@ export default {
   async checkLogin() {
     return await Request.send('Login', {
       user: 'test',
-      password: '34nf4',
+      password: 'test',
       channel: 'tab1'
     }).catch((err) => {
       console.log('[grpc-error]', err);

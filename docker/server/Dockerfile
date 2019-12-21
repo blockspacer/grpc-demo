@@ -3,10 +3,12 @@ FROM insready/bazel
 EXPOSE 9090
 
 RUN apt-get -y update &&\
-    apt-get upgrade -y bazel &&\
-    apt install libmysqlcppconn-dev
+    apt-get upgrade -y bazel
 
 ADD . /code/grpc-demo
+
+ADD ./docker/server/include /code/grpc-demo/server/include
+ADD ./docker/server/lib /code/grpc-demo/server/lib
 
 WORKDIR /code/grpc-demo
 

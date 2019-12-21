@@ -1,7 +1,7 @@
 import {UserServiceClient} from '../libs/server_grpc_web_pb.js';
 import Stub from '../libs/server_pb';
 
-const Client = new UserServiceClient(`http://${window.location.hostname}:8080`, null, null);
+const Client = new UserServiceClient(`https://${window.location.hostname}`, null, null);
 
 const lower = (str) => (str.replace(/^[A-Z]/g, (L) => L.toLowerCase()));
 const Upper = (str) => (str.replace(/^[a-z]/g, (L) => L.toUpperCase()));

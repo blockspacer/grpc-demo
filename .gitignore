@@ -1,3 +1,6 @@
 .clwb
 bazel-*
 .idea
+libs
+server/include
+server/lib

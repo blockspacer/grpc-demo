@@ -1,7 +1,9 @@
-FROM grpcweb/common
+FROM node:10-stretch
 
 EXPOSE 8081
 
+RUN npm i -g yarn
+
 WORKDIR /code/grpc-demo/client/
 
-CMD npm install && npm run proto-compile && npm run serve
+CMD yarn && yarn serve

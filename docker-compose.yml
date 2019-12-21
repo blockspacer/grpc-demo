@@ -1,10 +1,16 @@
 version: '3'
 services:
-  common:
+  db:
     build:
       context: ./
-      dockerfile: ./docker/common/Dockerfile
-    image: grpcweb/common
+      dockerfile: ./docker/db/Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+      MYSQL_DATABASE: test
+    volumes:
+      - ./docker/db/test.sql:/docker-entrypoint-initdb.d/dump.sql
   server:
     build:
       context: ./
@@ -12,27 +18,30 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./:/code/grpc-demo/
+      - ./WORKSPACE:/code/grpc-demo/WORKSPACE
+      - ./protos:/code/grpc-demo/protos
+      - ./server:/code/grpc-demo/server
+    links:
+      - db
   envoy:
     build:
       context: ./
       dockerfile: ./docker/envoy/Dockerfile
     ports:
-      - "8080:8080"
-    links:
-      - server
+      - "443:443"
+#    links:
+#      - server
   client:
     build:
       context: ./
       dockerfile: ./docker/client/Dockerfile
-    depends_on:
-      - common
     ports:
       - "8081:8081"
     volumes:
-      - ./protos:/code/grpc-demo/protos
       - ./client/public:/code/grpc-demo/client/public
       - ./client/src/:/code/grpc-demo/client/src
       - ./client/package.json:/code/grpc-demo/client/package.json
+      - ./client/.eslintignore:/code/grpc-demo/client/.eslintignore
       - ./client/vue.config.js:/code/grpc-demo/client/vue.config.js
       - ./client/babel.config.js:/code/grpc-demo/client/babel.config.js
+      - ./client/yarn.lock:/code/grpc-demo/client/yarn.lock

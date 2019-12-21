@@ -31,3 +31,7 @@ https://github.com/stackb/rules_proto
 
 ### grpc官方支持
 查阅bazel官方文档，从一个很不起眼的QA找到bazel给grpc官方提的issue，顺藤摸瓜找到grpc官方提供的proto编译插件
+
+### envoy自签名证书，chrome不通过
+访问：chrome://flags/#allow-insecure-localhost，把`Allow invalid certificates for resources loaded from localhost.`这
+一项启用，就可以正常访问envoy
