@@ -32,12 +32,12 @@ message LoginResponse {
 message CheckLoginRequest {
   string uid = 1;
   string token = 2;
-  string channel = 3;
 }
 
 // response
 message CheckLoginResponse {
   uint32 ret_code = 1;
+  string channel = 2;
 }
 // =========================
 

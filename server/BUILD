@@ -6,7 +6,8 @@ cc_binary(
     deps = [
         "@com_github_grpc_grpc//:grpc++",
         "//protos:server_grpc_lib",
-        "mysql_conn"
+        "mysql_conn",
+        "md5"
     ],
 )
 
@@ -30,4 +31,10 @@ cc_library(
         "lib/libmysqlclient.dylib"
     ],
     deps = [],
+)
+
+cc_library(
+    name = "md5",
+    srcs = ["Md5.cpp"],
+    hdrs = ["Md5.h"],
 )

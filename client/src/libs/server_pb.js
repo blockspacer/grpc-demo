@@ -557,8 +557,7 @@ proto.UserAgent.CheckLoginRequest.prototype.toObject = function(opt_includeInsta
 proto.UserAgent.CheckLoginRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     uid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    token: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    channel: jspb.Message.getFieldWithDefault(msg, 3, "")
+    token: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -603,10 +602,6 @@ proto.UserAgent.CheckLoginRequest.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {string} */ (reader.readString());
       msg.setToken(value);
       break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setChannel(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -650,13 +645,6 @@ proto.UserAgent.CheckLoginRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getChannel();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
 };
 
 
@@ -696,24 +684,6 @@ proto.UserAgent.CheckLoginRequest.prototype.setToken = function(value) {
 };
 
 
-/**
- * optional string channel = 3;
- * @return {string}
- */
-proto.UserAgent.CheckLoginRequest.prototype.getChannel = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.UserAgent.CheckLoginRequest} returns this
- */
-proto.UserAgent.CheckLoginRequest.prototype.setChannel = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
 
 
 
@@ -746,7 +716,8 @@ proto.UserAgent.CheckLoginResponse.prototype.toObject = function(opt_includeInst
  */
 proto.UserAgent.CheckLoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    retCode: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    retCode: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    channel: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -787,6 +758,10 @@ proto.UserAgent.CheckLoginResponse.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {number} */ (reader.readUint32());
       msg.setRetCode(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setChannel(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -823,6 +798,13 @@ proto.UserAgent.CheckLoginResponse.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = message.getChannel();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -841,6 +823,24 @@ proto.UserAgent.CheckLoginResponse.prototype.getRetCode = function() {
  */
 proto.UserAgent.CheckLoginResponse.prototype.setRetCode = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string channel = 2;
+ * @return {string}
+ */
+proto.UserAgent.CheckLoginResponse.prototype.getChannel = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.UserAgent.CheckLoginResponse} returns this
+ */
+proto.UserAgent.CheckLoginResponse.prototype.setChannel = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

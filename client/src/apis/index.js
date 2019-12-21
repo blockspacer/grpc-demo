@@ -1,14 +1,29 @@
 import Request from '../libs/request';
 
 export default {
-  async checkLogin() {
-    return await Request.send('Login', {
-      user: 'test',
-      password: 'test',
-      channel: 'tab1'
+  Login(user, password, channel) {
+    return Request.send('Login', {
+      user,
+      password,
+      channel
     }).catch((err) => {
       console.log('[grpc-error]', err);
     });
-
+  },
+  CheckLogin(uid, token) {
+    return Request.send('CheckLogin', {
+      uid,
+      token
+    }).catch((err) => {
+      console.log('[grpc-error]', err);
+    })
+  },
+  Register(user, password) {
+    return Request.send('Register', {
+      user,
+      password
+    }).catch((err) => {
+      console.log('[grpc-error]', err);
+    })
   }
 }
