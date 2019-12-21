@@ -56,7 +56,12 @@
           token: session.token
         });
       }
-      const ret = await Api.CheckLogin(session.uid.toString(), session.token);
+      const ret = await Api.CheckLogin(session.uid.toString(), session.token).catch(() => {
+        this.$message.error('服务器连接失败，请确认服务是否正常');
+        return {
+          retCode: -1
+        };
+      });
       if (ret.retCode === 0) {
         this.activeTab = ret.channel;
         await this.$store.dispatch(Actions.SET_CHANNEL, {
@@ -68,7 +73,16 @@
     },
     methods: {
       async registerUser() {
-        const ret = await Api.Register(this.register.user, this.register.password);
+        if (!this.register.user || !this.register.password) {
+          this.$message.warning('请输入正确的用户名和密码');
+          return ;
+        }
+        const ret = await Api.Register(this.register.user, this.register.password).catch(() => {
+          this.$message.error('服务器连接失败，请确认服务是否正常');
+          return {
+            retCode: -1
+          };
+        });
         if (ret.retCode === 0) {
           this.$message.success('注册成功，请登录');
           this.register.user = '';

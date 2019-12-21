@@ -39,9 +39,15 @@
     methods: {
       async login() {
         if (!this.user.length || !this.password) {
+          this.$message.warning('请输入正确的用户名和密码');
           return ;
         }
-        const ret = await Api.Login(this.user, this.password, this.sessionId);
+        const ret = await Api.Login(this.user, this.password, this.sessionId).catch(() => {
+          this.$message.error('服务器连接失败，请确认服务是否正常');
+          return {
+            retCode: -1
+          };
+        });
         if (ret.retCode === 0) {
           await this.$store.dispatch(Actions.SET_LOGIN_INFO, {
             uid: ret.uid,
