@@ -50,25 +50,25 @@
           token: ''
         };
       }
-      if (session.uid && session.token) {
+      if (session && session.uid && session.token) {
         await this.$store.dispatch(Actions.SET_LOGIN_INFO, {
           uid: session.uid,
           token: session.token
         });
-      }
-      const ret = await Api.CheckLogin(session.uid.toString(), session.token).catch(() => {
-        this.$message.error('服务器连接失败，请确认服务是否正常');
-        return {
-          retCode: -1
-        };
-      });
-      if (ret.retCode === 0) {
-        this.activeTab = ret.channel;
-        await this.$store.dispatch(Actions.SET_CHANNEL, {
-          channel: ret.channel
+        const ret = await Api.CheckLogin(session.uid.toString(), session.token).catch(() => {
+          this.$message.error('服务器连接失败，请确认服务是否正常');
+          return {
+            retCode: -1
+          };
         });
-      } else {
-        this.activeTab = 'tab1';
+        if (ret.retCode === 0) {
+          this.activeTab = ret.channel;
+          await this.$store.dispatch(Actions.SET_CHANNEL, {
+            channel: ret.channel
+          });
+        } else {
+          this.activeTab = 'tab1';
+        }
       }
     },
     methods: {
