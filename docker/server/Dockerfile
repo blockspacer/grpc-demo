@@ -7,8 +7,11 @@ RUN apt-get -y update &&\
 
 ADD . /code/grpc-demo
 
-ADD ./docker/server/include /code/grpc-demo/server/include
-ADD ./docker/server/lib /code/grpc-demo/server/lib
+RUN rm /code/grpc-demo/server/include
+RUN rm /code/grpc-demo/server/lib
+
+COPY ./docker/server/include /code/grpc-demo/server/include
+COPY ./docker/server/lib /code/grpc-demo/server/lib
 
 WORKDIR /code/grpc-demo
 

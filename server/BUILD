@@ -27,8 +27,8 @@ cc_library(
 cc_library(
     name = "mysql-lib",
     srcs = [
-        "lib/libmysqlclient.20.dylib",
-        "lib/libmysqlclient.dylib"
+        "lib/libmysqlclient.so.20",
+        "lib/libmysqlclient.so"
     ],
     deps = [],
 )
