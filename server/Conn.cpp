@@ -8,7 +8,7 @@
 #define DB_PASSWORD "rootpwd"
 #define DB_DBNAME "test"*/
 
-#define DB_HOST "127.0.0.1"
+#define DB_HOST "db"
 #define DB_PORT 3306
 #define DB_USER "root"
 #define DB_PASSWORD "rootpwd"
