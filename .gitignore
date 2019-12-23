@@ -2,3 +2,4 @@
 bazel-*
 .idea
 libs
+.DS_Store
