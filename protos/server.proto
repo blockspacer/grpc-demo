@@ -3,7 +3,7 @@ syntax = "proto3";
 package UserAgent;
 
 // UserLog Service
-service UserService {
+service User {
   rpc Login (LoginRequest) returns (LoginResponse) {}
   rpc CheckLogin (CheckLoginRequest) returns (CheckLoginResponse) {}
   rpc Register (RegisterRequest) returns (RegisterResponse) {}
@@ -21,7 +21,7 @@ message LoginRequest {
 // response
 message LoginResponse {
   uint32 ret_code = 1;
-  uint32 uid = 2;
+  string uid = 2;
   string token = 3;
 }
 // =========================

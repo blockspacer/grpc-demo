@@ -1,0 +1,64 @@
+# package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "server",
+    srcs = ["server.cpp"],
+    deps = [
+        "@com_github_grpc_grpc//:grpc++",
+        "//protos:server_grpc_lib",
+        "mysql_conn",
+        "md5"
+    ],
+)
+
+cc_library(
+    name = "mysql_conn",
+    srcs = ["Conn.cpp"],
+    hdrs = ["Conn.h"],
+    deps = ["mysql"],
+)
+
+cc_library(
+    name = "mysql",
+    hdrs = select({
+        ":macos": glob(["mysql/macos/include/**/*.h"]),
+        ":linux": glob(["mysql/linux/include/**/*.h"])
+    }),
+    includes = select({
+        ":macos": ["mysql/macos/"],
+        ":linux": ["mysql/linux/"],
+    }),
+    deps = ["mysql-lib"]
+)
+
+cc_library(
+    name = "mysql-lib",
+    srcs = select({
+        ":macos": [
+            "mysql/macos/lib/libmysqlclient.dylib",
+            "mysql/macos/lib/libmysqlclient.20.dylib",
+        ],
+        ":linux": [
+            "mysql/linux/lib/libmysqlclient.so",
+            "mysql/linux/lib/libmysqlclient.so.20",
+            "mysql/linux/lib/libmysqlclient.so.20.3.15",
+        ]
+    }),
+    deps = [],
+)
+
+cc_library(
+    name = "md5",
+    srcs = ["Md5.cpp"],
+    hdrs = ["Md5.h"],
+)
+
+config_setting(
+    name = "macos",
+    values = {"define": "os=macos"},
+)
+
+config_setting(
+    name = "linux",
+    values = {"define": "os=linux"},
+)

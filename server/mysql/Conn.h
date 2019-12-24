@@ -2,7 +2,8 @@
 #define GRPC_DEMO_CONN_H
 
 #include <string>
-#include "include/mysql.h"
+//#include "include/mysql.h"
+#include "macos/include/mysql.h"
 
 using namespace std;
 
@@ -12,11 +13,15 @@ public:
 
   ~Conn();
 
+  bool execute(const string& statement, MYSQL_BIND *parameters);
+
   // mysql句柄
   MYSQL *mysql;
 
-  bool initDB();
+  // prepared statement句柄
+  MYSQL_STMT *stmt;
 
+  bool initDB();
 };
 
 

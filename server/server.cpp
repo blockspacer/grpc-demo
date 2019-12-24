@@ -1,40 +1,14 @@
 #include <iostream>
-#include <memory>
-#include <string>
-#include <chrono>
-#include <sstream>
-
 #include <grpc++/grpc++.h>
 
-#include "protos/server.grpc.pb.h"
-
-#include "Conn.h"
-#include "Md5.h"
-
-#define EXPIRETIME 1800 // 登录态过期时间
-
-using namespace std;
+#include "service/UserService.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
-using grpc::ServerContext;
-using grpc::Status;
-using grpc::StatusCode;
-using UserAgent::LoginRequest;
-using UserAgent::LoginResponse;
-using UserAgent::CheckLoginRequest;
-using UserAgent::CheckLoginResponse;
-using UserAgent::RegisterRequest;
-using UserAgent::RegisterResponse;
-using UserAgent::UserService;
 
-string getTimestamp();
-string genToken(string uid, string ts, string ip, string channel);
-string parseIpString(string ipString);
-string encryptPassword(string pwd);
-string security(string input);
+using namespace std;
 
-class UserServerServiceImpl final : public UserService::Service {
+/*class UserServerServiceImpl final : public UserService::Service {
 public:
   UserServerServiceImpl() {
     //连接数据库
@@ -52,6 +26,7 @@ private:
 
   Status Login(ServerContext *context, const LoginRequest *request,
                LoginResponse *reply) override {
+
     const string userName = security(request->user());
     const string password = security(request->password());
     const string channel = security(request->channel());
@@ -115,11 +90,7 @@ private:
 
   Status CheckLogin(ServerContext *context, const CheckLoginRequest *request,
                     CheckLoginResponse *reply) override {
-    const string uid = security(request->uid());
-    const string token = security(request->token());
-    const string ip = parseIpString(context->peer());
 
-    string timestamp = getTimestamp();
     // 检查登录态是否合法
     string sql = "SELECT * FROM session WHERE `uid` = '" + uid + "'";
     if (mysql_query(db.mysql, sql.c_str())) {
@@ -171,8 +142,6 @@ private:
 
   Status Register(ServerContext *context, const RegisterRequest *request,
                   RegisterResponse *reply) override {
-    const string user = security(request->user());
-    const string password = security(request->password());
     // 检查用户名是否存在
     string sql = "SELECT * FROM users WHERE `name` = '" + user + "'";
     if (mysql_query(db.mysql, sql.c_str())) {
@@ -248,11 +217,11 @@ string security(string input) {
   // todo filter XSS attack
   // todo filter SQL inject
   return input;
-}
+}*/
 
 void RunServer() {
   string server_address("0.0.0.0:9090");
-  UserServerServiceImpl service;
+  UserService service;
 
   ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
