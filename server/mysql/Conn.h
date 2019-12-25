@@ -15,6 +15,10 @@ public:
 
   bool execute(const string& statement, MYSQL_BIND *parameters);
 
+  int getQueryNum();
+
+  int getAffectedNum();
+
   // mysql句柄
   MYSQL *mysql;
 

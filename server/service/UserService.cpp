@@ -1,5 +1,4 @@
 
-#include "../entity/UserEntity.h"
 #include "UserService.h"
 
 UserService::UserService() {
@@ -14,11 +13,11 @@ UserService::UserService() {
 }
 
 Status UserService::Login(ServerContext *context, const LoginRequest *request, LoginResponse *reply) {
-  const string userName = Utilty::security(request->user());
-  const string password = Utilty::security(request->password());
-  const string channel = Utilty::security(request->channel());
-  const string ip = Utilty::parseIpString(context->peer());
-  string timestamp = Utilty::getTimestamp();
+  /*const string userName = Utility::security(request->user());
+  const string password = Utility::security(request->password());
+  const string channel = Utility::security(request->channel());
+  const string ip = Utility::parseIpString(context->peer());
+  string timestamp = Utility::getTimestamp();
 
   auto *user = new UserEntity(userName);
   LoginInfo loginInfo;
@@ -35,17 +34,18 @@ Status UserService::Login(ServerContext *context, const LoginRequest *request, L
   } else { // 密码不正确
     reply->set_ret_code(1);
     return Status::OK;
-  }
+  }*/
+  return Status::OK;
 }
 
 Status UserService::CheckLogin(ServerContext *context, const CheckLoginRequest *request, CheckLoginResponse *reply) {
-  const string uid = Utilty::security(request->uid());
-  const string token = Utilty::security(request->token());
-  const string ip = Utilty::parseIpString(context->peer());
+  const string uid = Utility::security(request->uid());
+  const string token = Utility::security(request->token());
+  const string ip = Utility::parseIpString(context->peer());
 
-  string timestamp = Utilty::getTimestamp();
+  string timestamp = Utility::getTimestamp();
 
-  auto *user = new UserEntity(uid);
+  auto *user = new UserEntity(&db, uid);
 
   LoginInfo loginInfo;
 
@@ -64,18 +64,20 @@ Status UserService::CheckLogin(ServerContext *context, const CheckLoginRequest *
 }
 
 Status UserService::Register(ServerContext *context, const RegisterRequest *request, RegisterResponse *reply) {
-  const string user = Utilty::security(request->user());
-  const string password = Utilty::security(request->password());
+  const string user = Utility::security(request->user());
+  const string password = Utility::security(request->password());
 
-  int result = UserEntity::doRegister(user, password);
+  auto userEntity = new UserEntity(&db, user);
+
+  int result = userEntity->doRegister(user, password);
   switch(result) {
-    case 0:
+    case CODE_OK:
       reply->set_ret_code(0);
       return Status::OK;
-    case 1:  // 密码复杂度不够
+    case CODE_INVALID_PARAMS:  // 用户名或密码不符合要求
       reply->set_ret_code(1);
       return Status::OK;
-    case 2:  // 用户名已存在
+    case CODE_USER_EXIST:  // 用户名已存在
       reply->set_ret_code(2);
       return Status::OK;
     default:

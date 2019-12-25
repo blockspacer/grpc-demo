@@ -22,7 +22,7 @@ proto.UserAgent = require('./server_pb.js');
  * @struct
  * @final
  */
-proto.UserAgent.UserServiceClient =
+proto.UserAgent.UserClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -48,7 +48,7 @@ proto.UserAgent.UserServiceClient =
  * @struct
  * @final
  */
-proto.UserAgent.UserServicePromiseClient =
+proto.UserAgent.UserPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -72,8 +72,8 @@ proto.UserAgent.UserServicePromiseClient =
  *   !proto.UserAgent.LoginRequest,
  *   !proto.UserAgent.LoginResponse>}
  */
-const methodDescriptor_UserService_Login = new grpc.web.MethodDescriptor(
-  '/UserAgent.UserService/Login',
+const methodDescriptor_User_Login = new grpc.web.MethodDescriptor(
+  '/UserAgent.User/Login',
   grpc.web.MethodType.UNARY,
   proto.UserAgent.LoginRequest,
   proto.UserAgent.LoginResponse,
@@ -94,7 +94,7 @@ const methodDescriptor_UserService_Login = new grpc.web.MethodDescriptor(
  *   !proto.UserAgent.LoginRequest,
  *   !proto.UserAgent.LoginResponse>}
  */
-const methodInfo_UserService_Login = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_User_Login = new grpc.web.AbstractClientBase.MethodInfo(
   proto.UserAgent.LoginResponse,
   /**
    * @param {!proto.UserAgent.LoginRequest} request
@@ -117,13 +117,13 @@ const methodInfo_UserService_Login = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.UserAgent.LoginResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.UserAgent.UserServiceClient.prototype.login =
+proto.UserAgent.UserClient.prototype.login =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/UserAgent.UserService/Login',
+      '/UserAgent.User/Login',
       request,
       metadata || {},
-      methodDescriptor_UserService_Login,
+      methodDescriptor_User_Login,
       callback);
 };
 
@@ -136,13 +136,13 @@ proto.UserAgent.UserServiceClient.prototype.login =
  * @return {!Promise<!proto.UserAgent.LoginResponse>}
  *     A native promise that resolves to the response
  */
-proto.UserAgent.UserServicePromiseClient.prototype.login =
+proto.UserAgent.UserPromiseClient.prototype.login =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/UserAgent.UserService/Login',
+      '/UserAgent.User/Login',
       request,
       metadata || {},
-      methodDescriptor_UserService_Login);
+      methodDescriptor_User_Login);
 };
 
 
@@ -152,8 +152,8 @@ proto.UserAgent.UserServicePromiseClient.prototype.login =
  *   !proto.UserAgent.CheckLoginRequest,
  *   !proto.UserAgent.CheckLoginResponse>}
  */
-const methodDescriptor_UserService_CheckLogin = new grpc.web.MethodDescriptor(
-  '/UserAgent.UserService/CheckLogin',
+const methodDescriptor_User_CheckLogin = new grpc.web.MethodDescriptor(
+  '/UserAgent.User/CheckLogin',
   grpc.web.MethodType.UNARY,
   proto.UserAgent.CheckLoginRequest,
   proto.UserAgent.CheckLoginResponse,
@@ -174,7 +174,7 @@ const methodDescriptor_UserService_CheckLogin = new grpc.web.MethodDescriptor(
  *   !proto.UserAgent.CheckLoginRequest,
  *   !proto.UserAgent.CheckLoginResponse>}
  */
-const methodInfo_UserService_CheckLogin = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_User_CheckLogin = new grpc.web.AbstractClientBase.MethodInfo(
   proto.UserAgent.CheckLoginResponse,
   /**
    * @param {!proto.UserAgent.CheckLoginRequest} request
@@ -197,13 +197,13 @@ const methodInfo_UserService_CheckLogin = new grpc.web.AbstractClientBase.Method
  * @return {!grpc.web.ClientReadableStream<!proto.UserAgent.CheckLoginResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.UserAgent.UserServiceClient.prototype.checkLogin =
+proto.UserAgent.UserClient.prototype.checkLogin =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/UserAgent.UserService/CheckLogin',
+      '/UserAgent.User/CheckLogin',
       request,
       metadata || {},
-      methodDescriptor_UserService_CheckLogin,
+      methodDescriptor_User_CheckLogin,
       callback);
 };
 
@@ -216,13 +216,13 @@ proto.UserAgent.UserServiceClient.prototype.checkLogin =
  * @return {!Promise<!proto.UserAgent.CheckLoginResponse>}
  *     A native promise that resolves to the response
  */
-proto.UserAgent.UserServicePromiseClient.prototype.checkLogin =
+proto.UserAgent.UserPromiseClient.prototype.checkLogin =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/UserAgent.UserService/CheckLogin',
+      '/UserAgent.User/CheckLogin',
       request,
       metadata || {},
-      methodDescriptor_UserService_CheckLogin);
+      methodDescriptor_User_CheckLogin);
 };
 
 
@@ -232,8 +232,8 @@ proto.UserAgent.UserServicePromiseClient.prototype.checkLogin =
  *   !proto.UserAgent.RegisterRequest,
  *   !proto.UserAgent.RegisterResponse>}
  */
-const methodDescriptor_UserService_Register = new grpc.web.MethodDescriptor(
-  '/UserAgent.UserService/Register',
+const methodDescriptor_User_Register = new grpc.web.MethodDescriptor(
+  '/UserAgent.User/Register',
   grpc.web.MethodType.UNARY,
   proto.UserAgent.RegisterRequest,
   proto.UserAgent.RegisterResponse,
@@ -254,7 +254,7 @@ const methodDescriptor_UserService_Register = new grpc.web.MethodDescriptor(
  *   !proto.UserAgent.RegisterRequest,
  *   !proto.UserAgent.RegisterResponse>}
  */
-const methodInfo_UserService_Register = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_User_Register = new grpc.web.AbstractClientBase.MethodInfo(
   proto.UserAgent.RegisterResponse,
   /**
    * @param {!proto.UserAgent.RegisterRequest} request
@@ -277,13 +277,13 @@ const methodInfo_UserService_Register = new grpc.web.AbstractClientBase.MethodIn
  * @return {!grpc.web.ClientReadableStream<!proto.UserAgent.RegisterResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.UserAgent.UserServiceClient.prototype.register =
+proto.UserAgent.UserClient.prototype.register =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/UserAgent.UserService/Register',
+      '/UserAgent.User/Register',
       request,
       metadata || {},
-      methodDescriptor_UserService_Register,
+      methodDescriptor_User_Register,
       callback);
 };
 
@@ -296,13 +296,13 @@ proto.UserAgent.UserServiceClient.prototype.register =
  * @return {!Promise<!proto.UserAgent.RegisterResponse>}
  *     A native promise that resolves to the response
  */
-proto.UserAgent.UserServicePromiseClient.prototype.register =
+proto.UserAgent.UserPromiseClient.prototype.register =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/UserAgent.UserService/Register',
+      '/UserAgent.User/Register',
       request,
       metadata || {},
-      methodDescriptor_UserService_Register);
+      methodDescriptor_User_Register);
 };
 
 

@@ -41,15 +41,35 @@ bool Conn::execute(const string& statement, MYSQL_BIND *parameters) {
     cout << "Fail to prepare statement" << endl;
     return false;
   }
+
+  int param_count = mysql_stmt_param_count(stmt);
+
   // 绑定参数
-  if (getArrayLen(parameters) > 0 && mysql_stmt_bind_param(stmt, parameters)) {
-    cout << "Fail to bind parameters" << endl;
-    return false;
+  if (param_count > 0) {
+    if (mysql_stmt_bind_param(stmt, parameters)) {
+      cout << "Fail to bind parameters" << mysql_stmt_error(stmt) << endl;
+      return false;
+    }
   }
+
   if (mysql_stmt_execute(stmt)) {
     cout << "Fail to execute statement" << endl;
+    cout << mysql_stmt_error(stmt) << endl;
     return false;
   }
+  return true;
+}
+
+int Conn::getQueryNum() {
+  if (mysql_stmt_store_result(stmt)) {
+    cout << "Fail to fetch result" << endl;
+    return false;
+  }
+  return mysql_stmt_num_rows(stmt);
+}
+
+int Conn::getAffectedNum() {
+  return mysql_stmt_affected_rows(stmt);
 }
 
 bool Conn::initDB() {

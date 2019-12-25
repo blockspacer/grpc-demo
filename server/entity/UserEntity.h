@@ -2,9 +2,19 @@
 #ifndef GRPC_DEMO_USERENTITY_H
 #define GRPC_DEMO_USERENTITY_H
 
-#include <iostream>
+#define CODE_OK 0
+#define CODE_INVALID_PARAMS 1
+#define CODE_USER_EXIST 2
+#define CODE_DB_ERROR 100
 
-//#include "../encryption/Md5.h"
+#define FIELD_USERNAME_LENGTH 20
+#define FIELD_PASSWORD_LENGTH 64
+
+#include <iostream>
+#include <regex>
+
+#include "../encryption/bcrypt/bcrypt.h"
+#include "../mysql/Conn.h"
 
 using namespace std;
 
@@ -17,15 +27,15 @@ struct LoginInfo {
 
 class UserEntity {
 public:
-  string uid = 0;
+  unsigned int uid = 0;
   string userName;
   LoginInfo loginInfo;
 
-  static int doRegister(string username, string password);
+  int doRegister(string username, string password);
 
-  explicit UserEntity(string userName);
+  explicit UserEntity(Conn *conn, string userName);
 
-  explicit UserEntity(unsigned int uid);
+  explicit UserEntity(Conn *conn, unsigned int uid);
 
   bool validatePassword(string password);
 
@@ -33,6 +43,8 @@ public:
 
   bool refreshLoginInfo(LoginInfo info);
 private:
+  Conn *db;
+
   bool loadUserInfo();
   bool loadLoginInfo();
 

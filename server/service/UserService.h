@@ -8,7 +8,8 @@
 #include "protos/server.grpc.pb.h"
 #include <grpc++/grpc++.h>
 
-#include "../utilty/Utilty.h"
+#include "../utility/Utility.h"
+#include "../entity/UserEntity.h"
 
 using namespace std;
 

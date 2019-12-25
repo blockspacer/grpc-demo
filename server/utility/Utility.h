@@ -2,21 +2,20 @@
 // Created by Zhong Yu on 2019/12/24.
 //
 
-#ifndef GRPC_DEMO_UTILTY_H
-#define GRPC_DEMO_UTILTY_H
+#ifndef GRPC_DEMO_UTILITY_H
+#define GRPC_DEMO_UTILITY_H
 
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-class Utilty {
+class Utility {
 public:
   static string parseIpString(string ipString);
   static string getTimestamp();
 
-  template <class T>
-  static T security(T &input);
+  static string security(string input);
 };
 
 

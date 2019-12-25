@@ -2,9 +2,9 @@
 // Created by Zhong Yu on 2019/12/24.
 //
 
-#include "Utilty.h"
+#include "Utility.h"
 
-string Utilty::parseIpString(string ipString) {
+string Utility::parseIpString(string ipString) {
   char *ipStr = new char[ipString.length() + 1];
   strcpy(ipStr, ipString.c_str());
   const char *delimiter = ":";
@@ -12,7 +12,7 @@ string Utilty::parseIpString(string ipString) {
   return strtok(NULL, delimiter);
 }
 
-string Utilty::getTimestamp() {
+string Utility::getTimestamp() {
   chrono::time_point<chrono::system_clock,chrono::milliseconds> tp = chrono::time_point_cast<chrono::milliseconds>(chrono::system_clock::now());
   time_t timestamp =  tp.time_since_epoch().count();
   time(&timestamp);
@@ -21,8 +21,7 @@ string Utilty::getTimestamp() {
   return ss.str();
 }
 
-template <class T>
-T Utilty::security(T &input) {
+string Utility::security(string input) {
   // todo filter XSS attack
   // todo filter SQL inject
   return input;
