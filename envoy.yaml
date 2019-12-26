@@ -35,6 +35,7 @@ static_resources:
                 - name: envoy.grpc_web
                 - name: envoy.cors
                 - name: envoy.router
+              use_remote_address: true
           tls_context:
             common_tls_context:
               tls_certificates:
@@ -49,4 +50,4 @@ static_resources:
       http2_protocol_options: {}
       lb_policy: round_robin
 #      hosts: [{ socket_address: { address: server, port_value: 9090 }}]
-      hosts: [{ socket_address: { address: 192.168.0.103, port_value: 9090 }}]
+      hosts: [{ socket_address: { address: 10.43.21.136, port_value: 9090 }}]

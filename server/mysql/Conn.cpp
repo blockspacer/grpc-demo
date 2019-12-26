@@ -10,12 +10,6 @@
 
 using namespace std;
 
-template <class T>
-int getArrayLen(T &array)
-{
-  return (sizeof(array) / sizeof(MYSQL_BIND));
-}
-
 Conn::Conn() {
   mysql = mysql_init(NULL);
   stmt = mysql_stmt_init(mysql);
@@ -70,6 +64,18 @@ int Conn::getQueryNum() {
 
 int Conn::getAffectedNum() {
   return mysql_stmt_affected_rows(stmt);
+}
+
+bool Conn::bindResult(MYSQL_BIND *result) {
+  if (mysql_stmt_bind_result(stmt, result)) {
+    cout << "Fail to bind result" << endl;
+    return false;
+  }
+  return true;
+}
+
+bool Conn::fetch() {
+  return mysql_stmt_fetch(stmt);
 }
 
 bool Conn::initDB() {

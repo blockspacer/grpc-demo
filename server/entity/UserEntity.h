@@ -8,12 +8,19 @@
 #define CODE_DB_ERROR 100
 
 #define FIELD_USERNAME_LENGTH 20
+#define FIELD_PASSWORD_BEFORE_ENCRYPT_LENGTH 30
 #define FIELD_PASSWORD_LENGTH 64
+
+#define INITIALIZE_NONE 0
+#define INITIALIZE_USER_PASSWORD 1
+#define INITIALIZE_UID 2
 
 #include <iostream>
 #include <regex>
+#include <string>
 
 #include "../encryption/bcrypt/bcrypt.h"
+#include "../encryption/md5/Md5.h"
 #include "../mysql/Conn.h"
 
 using namespace std;
@@ -29,28 +36,29 @@ class UserEntity {
 public:
   unsigned int uid = 0;
   string userName;
-  LoginInfo loginInfo;
+  string password;
+  LoginInfo *loginInfo;
+  int initType = INITIALIZE_NONE;
 
-  int doRegister(string username, string password);
+  explicit UserEntity(Conn *conn, string userName, string password);
 
-  explicit UserEntity(Conn *conn, string userName);
+  explicit UserEntity(Conn *conn, unsigned int uid, LoginInfo *loginInfo);
 
-  explicit UserEntity(Conn *conn, unsigned int uid);
+  int doRegister();
 
-  bool validatePassword(string password);
+  bool login(LoginInfo *loginInfo);
 
-  bool validateLoginInfo(LoginInfo info);
-
-  bool refreshLoginInfo(LoginInfo info);
+  bool checkLogin();
 
   static string encryptPassword(string pwd);
 private:
   Conn *db;
 
-  bool loadUserInfo();
-  bool loadLoginInfo();
+  bool validateAccountInfo();
 
-  string genToken(string uid, string ts, string ip, string channel);
+  bool refreshLoginInfo(LoginInfo *loginInfo);
+
+  string genToken(LoginInfo *loginInfo);
 };
 
 

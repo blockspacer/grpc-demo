@@ -2,8 +2,8 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "md5",
-    srcs = ["Md5.cpp"],
-    hdrs = ["Md5.h"],
+    srcs = ["md5/Md5.cpp"],
+    hdrs = ["md5/Md5.h"],
 )
 
 cc_library(

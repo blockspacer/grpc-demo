@@ -19,6 +19,10 @@ public:
 
   int getAffectedNum();
 
+  bool bindResult(MYSQL_BIND *result);
+
+  bool fetch();
+
   // mysql句柄
   MYSQL *mysql;
 

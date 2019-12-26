@@ -21,11 +21,13 @@ cc_library(
     name = "mysql",
     hdrs = select({
         "//server/mysql:macos": glob(["macos/include/**/*.h"]),
-        "//server/mysql:linux": glob(["linux/include/**/*.h"])
+        "//server/mysql:linux": glob(["linux/include/**/*.h"]),
+        "//conditions:default": glob(["macos/include/**/*.h"]),
     }),
     includes = select({
         "//server/mysql:macos": ["macos/"],
         "//server/mysql:linux": ["linux/"],
+        "//conditions:default": ["macos/"],
     }),
     deps = ["mysql-lib"]
 )
@@ -41,6 +43,10 @@ cc_library(
             "linux/lib/libmysqlclient.so",
             "linux/lib/libmysqlclient.so.20",
             "linux/lib/libmysqlclient.so.20.3.15",
+        ],
+        "//conditions:default": [
+            "macos/lib/libmysqlclient.dylib",
+            "macos/lib/libmysqlclient.20.dylib",
         ]
     }),
     deps = [],

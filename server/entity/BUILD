@@ -6,6 +6,7 @@ cc_library(
     hdrs = ["UserEntity.h"],
     deps = [
         "//server/mysql:mysql_conn",
-        "//server/encryption:bcrypt"
+        "//server/encryption:bcrypt",
+        "//server/encryption:md5",
     ],
 )
