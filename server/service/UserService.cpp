@@ -13,13 +13,13 @@ UserService::UserService() {
 }
 
 Status UserService::Login(ServerContext *context, const LoginRequest *request, LoginResponse *reply) {
-  /*const string userName = Utility::security(request->user());
+  const string userName = Utility::security(request->user());
   const string password = Utility::security(request->password());
   const string channel = Utility::security(request->channel());
   const string ip = Utility::parseIpString(context->peer());
   string timestamp = Utility::getTimestamp();
 
-  auto *user = new UserEntity(userName);
+  auto *user = new UserEntity(&db, userName);
   LoginInfo loginInfo;
   loginInfo.channel = channel;
   loginInfo.ip = ip;
@@ -34,7 +34,7 @@ Status UserService::Login(ServerContext *context, const LoginRequest *request, L
   } else { // 密码不正确
     reply->set_ret_code(1);
     return Status::OK;
-  }*/
+  }
   return Status::OK;
 }
 

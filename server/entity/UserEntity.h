@@ -42,13 +42,14 @@ public:
   bool validateLoginInfo(LoginInfo info);
 
   bool refreshLoginInfo(LoginInfo info);
+
+  static string encryptPassword(string pwd);
 private:
   Conn *db;
 
   bool loadUserInfo();
   bool loadLoginInfo();
 
-  string encryptPassword(string pwd);
   string genToken(string uid, string ts, string ip, string channel);
 };
 

@@ -79,7 +79,12 @@ bool UserEntity::validatePassword(string password) {
 }
 
 bool UserEntity::loadLoginInfo() {
-  return true;
+  if (userName.length() > 0) {
+
+  } else if (uid > 0) {
+
+  }
+  return false;
 }
 
 bool UserEntity::loadUserInfo() {
