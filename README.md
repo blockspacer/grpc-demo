@@ -63,6 +63,7 @@ token|VARCHAR(100)|N
 
 ## 功能实现
 ### 目录结构
+```
 ├── README.md
 ├── WORKSPACE
 ├── client -- 客户端代码
@@ -73,6 +74,7 @@ token|VARCHAR(100)|N
 ├── protos -- proto文件存储
 ├── scripts -- 运行时执行脚本存放
 └── server -- 服务端代码
+```
 
 # 踩坑记录
 https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Questions.md
