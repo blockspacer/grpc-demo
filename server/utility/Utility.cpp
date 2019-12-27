@@ -22,6 +22,8 @@ string Utility::getTimestamp() {
 }
 
 string Utility::security(string input) {
-  // todo filter XSS attack
-  return input;
+  regex_constants::match_flag_type mode = regex_constants::match_any;
+  regex filter("[\"'<>]");
+  string filterStr = regex_replace(input, filter, "", mode);
+  return filterStr;
 }
