@@ -23,6 +23,5 @@ string Utility::getTimestamp() {
 
 string Utility::security(string input) {
   // todo filter XSS attack
-  // todo filter SQL inject
   return input;
 }

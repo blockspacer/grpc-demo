@@ -2,13 +2,9 @@
 #include "UserService.h"
 
 UserService::UserService() {
-  //连接数据库
-  bool conn = db.initDB();
-
-  if (!conn) {
-    cout << "connect fails\n";
-  } else {
-    cout << "Connect database successfully" << endl;
+  // 检查数据库连接，如果没连上，再连一次
+  if (!db.connected && !db.initDB()) {
+    cout << "No database connection." << endl;
   }
 }
 

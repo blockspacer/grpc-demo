@@ -39,3 +39,10 @@ docker容器中绑定的ip和端口，一开始无法在宿主机访问。原因
 
 ### GRPC拿到的客户端ip是Envoy容器IP
 在Envoy配置中设置`use_remote_address`字段即可透传真实客户端IP。
+
+### docker-compose下启动顺序不可控导致服务器初始化时db不可用
+解决方案很多：
+1. https://www.cnblogs.com/wang_yb/p/9400291.html
+2. https://www.jianshu.com/p/9446f210e327
+
+最终还是通过修改服务器逻辑解决：初始化时如果连接失败，则在下一次发起db请求时，重新尝试连接。

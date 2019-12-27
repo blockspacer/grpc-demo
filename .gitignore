@@ -3,3 +3,4 @@ bazel-*
 .idea
 libs
 .DS_Store
+docker/db/empty

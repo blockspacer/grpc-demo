@@ -76,5 +76,10 @@ token|VARCHAR(100)|N
 └── server -- 服务端代码
 ```
 
+### 安全性
+1. 用户密码：使用Bcrypt加密，复杂度因子：10
+2. 登录态token：使用md5+Bcrypt加密，Bcrypt复杂度因子：6
+3. 输入安全：
+
 # 踩坑记录
 https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Questions.md

@@ -3,7 +3,7 @@
 
 #include <string>
 //#include "include/mysql.h"
-#include "macos/include/mysql.h"
+#include "include/mysql.h"
 
 using namespace std;
 
@@ -28,6 +28,8 @@ public:
 
   // prepared statement句柄
   MYSQL_STMT *stmt;
+
+  bool connected = false;
 
   bool initDB();
 };

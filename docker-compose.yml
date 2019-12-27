@@ -10,6 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpwd
       MYSQL_DATABASE: test
     volumes:
+      - ./docker/db/empty:/var/lib/mysql/
       - ./docker/db/test.sql:/docker-entrypoint-initdb.d/dump.sql
   server:
     build:
@@ -29,8 +30,8 @@ services:
       dockerfile: ./docker/envoy/Dockerfile
     ports:
       - "443:443"
-#    links:
-#      - server
+    links:
+      - server
   client:
     build:
       context: ./

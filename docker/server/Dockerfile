@@ -10,7 +10,7 @@ ADD . /code/grpc-demo
 WORKDIR /code/grpc-demo
 
 # 把依赖库都安装了
-RUN bazel build //server:server
+RUN bazel build //server:server --define os=linux
 
 # 运行时编译
-CMD bazel run //server:server
+CMD bazel run //server:server --define os=linux

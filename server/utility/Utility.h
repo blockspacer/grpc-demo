@@ -6,7 +6,9 @@
 #define GRPC_DEMO_UTILITY_H
 
 #include <iostream>
+#include <cstring>
 #include <sstream>
+#include <chrono>
 
 using namespace std;
 

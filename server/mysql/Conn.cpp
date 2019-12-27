@@ -2,7 +2,8 @@
 #include <string>
 #include "Conn.h"
 
-#define DB_HOST "127.0.0.1"
+//#define DB_HOST "127.0.0.1"
+#define DB_HOST "db"
 #define DB_PORT 3306
 #define DB_USER "root"
 #define DB_PASSWORD "rootpwd"
@@ -11,13 +12,7 @@
 using namespace std;
 
 Conn::Conn() {
-  mysql = mysql_init(NULL);
-  stmt = mysql_stmt_init(mysql);
-
-  if (!stmt) {
-    cout << "Error:" << mysql_error(mysql);
-    exit(1);
-  }
+  initDB();
 }
 
 Conn::~Conn() {
@@ -30,6 +25,11 @@ Conn::~Conn() {
 }
 
 bool Conn::execute(const string& statement, MYSQL_BIND *parameters) {
+  // 检查db连接
+  if (!connected && !initDB()) {
+    cout << "Cannot connect to database" << endl;
+    return false;
+  }
   // 执行prepare
   if (mysql_stmt_prepare(stmt, statement.c_str(), statement.length())) {
     cout << "Fail to prepare statement" << endl;
@@ -79,13 +79,25 @@ bool Conn::fetch() {
 }
 
 bool Conn::initDB() {
+  if (connected) {
+    return true;
+  }
+
+  mysql = mysql_init(NULL);
+  stmt = mysql_stmt_init(mysql);
+
+  if (!stmt) {
+    cout << "Error:" << mysql_error(mysql);
+    return false;
+  }
 
   mysql = mysql_real_connect(mysql, DB_HOST, DB_USER, DB_PASSWORD, DB_DBNAME, DB_PORT, NULL, 0);
 
   if (!mysql) {
-    cout << "Connect Error: " << mysql_error(mysql) << endl;
-    exit(1);
+    cout << "Fail to connect database" << endl;
+    return false;
+  } else {
+    connected = true;
+    return true;
   }
-
-  return true;
 }
