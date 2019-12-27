@@ -16,31 +16,63 @@ $ cd /path/of/project && docker-compose up
 浏览器输入路径：`https://127.0.0.1:8081`
 
 # 实现
-## 功能
+## 需求功能点
 1. 用户注册
 2. 用户登录
-3. 登录态tab、ip互斥
+3. 持久登录态
+4. 登录态tab、ip互斥
 
-## 部分细节
-1. client到envoy走了HTTPS，envoy使用的自签名证书。
-2. 客户端、代理、服务端使用docker部署，docker-compose进行容器管理。
-3. 所有代码走的运行时编译，非提前编译好的可执行文件。
+## 功能设计
+### 登录态设计
+1. 安全
+   - 防伪造：混合加密，部分数据服务端存储
+   - 防窃取：传输链路使用https，服务器针对传输数据做充分XSS、SQL安全检查
+2. 性能
+   - token算法只在生成时执行，其余时候只做比对
+   - 使用混合hash算法计算
+3. 互斥
+   - 登录态信息包含渠道、IP等信息
 
-# 不足之处
-## 安全性
-1. XSS过滤
-2. SQL注入防范
-   - mysql-connector-c++可以使用prepared statement来执行SQL语句
-3. 密码存储
-   - 当前只使用了md5加盐，为提高安全性，应考虑混合加密的方式
-4. envoy和server之间链路没有做加密，在单机部署的情况下是安全的，但对多机集群的情况，还是需要做链路加密。
-    
-## 封装程度
-1. `server.cpp`文件略显臃肿，操作数据库部分可以封装得复用程度更高一些。
+### 登录态字段构成：
+字段名|备注
+---|---
+uid|用户id，此处简单处理，为db自增ID
+loginTime|登录时间，默认过期时间为30分钟
+ip|登录ip，发生变更则登录态失效
+channel|登录渠道，不同渠道登录态不共享
+token|登录态凭证，使用混合算法加密
 
-## 性能
-1. 服务器只使用一个`mysql`连接实例
-2. 登录态存储在mysql，对于单点登录的设计来说，存在性能问题，业界方案一般存储在redis等kv高性能持久层。
+### DB设计
+用户信息表
+
+字段名|类型|是否主键|备注
+---|---|---|---
+id|INT(11)|Y|AUTO_INCREMENT
+user|VARCHAR(100)|N
+password|VARCHAR(255)|N
+
+登录态表
+
+字段名|类型|是否主键|备注
+---|---|---|---
+uid|INT(11)|Y|不做外键
+loginTime|VARCHAR(20)|N
+ip|VARCHAR(20)|N
+channel|VARCHAR(10)|N
+token|VARCHAR(100)|N
+
+## 功能实现
+### 目录结构
+├── README.md
+├── WORKSPACE
+├── client -- 客户端代码
+├── docker -- 执行环境封装
+├── docker-compose.yml -- docker-compose配置文件
+├── docs -- 文档存储
+├── envoy.yaml -- Enovy代理配置
+├── protos -- proto文件存储
+├── scripts -- 运行时执行脚本存放
+└── server -- 服务端代码
 
 # 踩坑记录
 https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Questions.md
