@@ -15,6 +15,8 @@
 #define INITIALIZE_USER_PASSWORD 1
 #define INITIALIZE_UID 2
 
+#define LOGIN_INFO_EXPIRE_TIME 1800
+
 #include <iostream>
 #include <regex>
 #include <string>
@@ -42,13 +44,13 @@ public:
 
   explicit UserEntity(Conn *conn, string userName, string password);
 
-  explicit UserEntity(Conn *conn, unsigned int uid, LoginInfo *loginInfo);
+  explicit UserEntity(Conn *conn, unsigned int uid);
 
   int doRegister();
 
-  bool login(LoginInfo *loginInfo);
+  bool login(LoginInfo *info);
 
-  bool checkLogin();
+  bool checkLogin(LoginInfo *info, const char *ts);
 
   static string encryptPassword(string pwd);
 private:
@@ -56,9 +58,9 @@ private:
 
   bool validateAccountInfo();
 
-  bool refreshLoginInfo(LoginInfo *loginInfo);
+  bool refreshLoginInfo(LoginInfo *info);
 
-  string genToken(LoginInfo *loginInfo);
+  string genToken(LoginInfo *info);
 };
 
 

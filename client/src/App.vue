@@ -55,7 +55,7 @@
           uid: session.uid,
           token: session.token
         });
-        const ret = await Api.CheckLogin(session.uid.toString(), session.token).catch(() => {
+        const ret = await Api.CheckLogin(+session.uid, session.token).catch(() => {
           this.$message.error('服务器连接失败，请确认服务是否正常');
           return {
             retCode: -1

@@ -48,6 +48,7 @@
             retCode: -1
           };
         });
+        console.log(ret);
         if (ret.retCode === 0) {
           await this.$store.dispatch(Actions.SET_LOGIN_INFO, {
             uid: ret.uid,

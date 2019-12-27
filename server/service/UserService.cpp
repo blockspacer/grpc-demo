@@ -28,6 +28,8 @@ Status UserService::Login(ServerContext *context, const LoginRequest *request, L
   // 执行登录操作
   if (user->login(&loginInfo)) {
     reply->set_ret_code(0);
+    reply->set_uid(user->uid);
+    reply->set_token(user->loginInfo->token);
     return Status::OK;
   } else { // 密码不正确
     reply->set_ret_code(1);
@@ -37,29 +39,26 @@ Status UserService::Login(ServerContext *context, const LoginRequest *request, L
 }
 
 Status UserService::CheckLogin(ServerContext *context, const CheckLoginRequest *request, CheckLoginResponse *reply) {
-  /*const string uid = Utility::security(request->uid());
+  unsigned int uid = request->uid();
   const string token = Utility::security(request->token());
   const string ip = Utility::parseIpString(context->peer());
-
   string timestamp = Utility::getTimestamp();
+
+  LoginInfo loginInfo;
+  loginInfo.ip = ip;
+  loginInfo.token = token;
 
   auto *user = new UserEntity(&db, uid);
 
-  LoginInfo loginInfo;
-
-  loginInfo.ip = ip;
-  loginInfo.token = ip;
-
   // 检查登录态
-  if (user->validateLoginInfo(loginInfo)) {
+  if (user->checkLogin(&loginInfo, timestamp.c_str())) {
     reply->set_ret_code(0);
-    reply->set_channel(user->loginInfo.channel);
+    reply->set_channel(user->loginInfo->channel);
     return Status::OK;
   } else {  // 没有任何一个tab的有效登录态
     reply->set_ret_code(1);
     return Status::OK;
-  }*/
-  return Status::OK;
+  }
 }
 
 Status UserService::Register(ServerContext *context, const RegisterRequest *request, RegisterResponse *reply) {

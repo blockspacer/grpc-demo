@@ -25,12 +25,9 @@ grpc_extra_deps()
 bazel官方提供的rules_proto库不支持grpc协议的proto编译，导致service结构无法解析输出，需要使用第三方的rules_proto库支持：
 https://github.com/stackb/rules_proto
 
-### rules_proto更新延迟
+### 第三方插件rules_proto问题
 由于新版本的grpc，把一些插件移动了位置，导致rules_proto依赖寻找报错，已有网友提交pr修复，目前未被合并，
 故无法使用新版本的rules_proto对proto文件进行编译，详情：https://github.com/stackb/rules_proto/issues/108
-
-### grpc官方支持
-查阅bazel官方文档，从一个很不起眼的QA找到bazel给grpc官方提的issue，顺藤摸瓜找到grpc官方提供的proto编译插件
 
 ### envoy自签名证书，chrome不通过
 访问：chrome://flags/#allow-insecure-localhost，把`Allow invalid certificates for resources loaded from localhost.`这
@@ -38,3 +35,7 @@ https://github.com/stackb/rules_proto
 
 ### webpack-dev-server绑定端口异常
 docker容器中绑定的ip和端口，一开始无法在宿主机访问。原因是webpack配置写死了127.0.0.1，改为0.0.0.0解决。
+关于127.0.0.1和0.0.0.0的区别：https://juejin.im/post/5d258b6ae51d454f73356dcf
+
+### GRPC拿到的客户端ip是Envoy容器IP
+在Envoy配置中设置`use_remote_address`字段即可透传真实客户端IP。

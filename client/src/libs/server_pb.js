@@ -367,7 +367,7 @@ proto.UserAgent.LoginResponse.prototype.toObject = function(opt_includeInstance)
 proto.UserAgent.LoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     retCode: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    uid: jspb.Message.getFieldWithDefault(msg, 2, 0),
     token: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -410,7 +410,7 @@ proto.UserAgent.LoginResponse.deserializeBinaryFromReader = function(msg, reader
       msg.setRetCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setUid(value);
       break;
     case 3:
@@ -454,8 +454,8 @@ proto.UserAgent.LoginResponse.serializeBinaryToWriter = function(message, writer
     );
   }
   f = message.getUid();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeUint32(
       2,
       f
     );
@@ -489,20 +489,20 @@ proto.UserAgent.LoginResponse.prototype.setRetCode = function(value) {
 
 
 /**
- * optional string uid = 2;
- * @return {string}
+ * optional uint32 uid = 2;
+ * @return {number}
  */
 proto.UserAgent.LoginResponse.prototype.getUid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.UserAgent.LoginResponse} returns this
  */
 proto.UserAgent.LoginResponse.prototype.setUid = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -556,7 +556,7 @@ proto.UserAgent.CheckLoginRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.UserAgent.CheckLoginRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    uid: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -595,7 +595,7 @@ proto.UserAgent.CheckLoginRequest.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setUid(value);
       break;
     case 2:
@@ -632,8 +632,8 @@ proto.UserAgent.CheckLoginRequest.prototype.serializeBinary = function() {
 proto.UserAgent.CheckLoginRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getUid();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeUint32(
       1,
       f
     );
@@ -649,20 +649,20 @@ proto.UserAgent.CheckLoginRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional string uid = 1;
- * @return {string}
+ * optional uint32 uid = 1;
+ * @return {number}
  */
 proto.UserAgent.CheckLoginRequest.prototype.getUid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.UserAgent.CheckLoginRequest} returns this
  */
 proto.UserAgent.CheckLoginRequest.prototype.setUid = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
