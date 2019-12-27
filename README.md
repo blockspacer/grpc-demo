@@ -9,7 +9,7 @@
 
 ## 运行
 ```
-$ cd /path/of/project && docker-compose up
+$ cd /path/of/project && sh ./run.sh
 ```
 
 ## 访问
