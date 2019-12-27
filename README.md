@@ -80,6 +80,12 @@ token|VARCHAR(100)|N
 1. 用户密码：使用Bcrypt加密，复杂度因子：10
 2. 登录态token：使用md5+Bcrypt加密，Bcrypt复杂度因子：6
 3. 输入安全：
+    - 过滤非法字符
+    - 防止SQL注入，使用MYSQL官方的prepared statement
+    
+### 部署
+使用`docker`封装执行环境，`docker-compose`管理容器。
+服务器端、客户端代码都走的实时源码编译。
 
 # 踩坑记录
 https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Questions.md
