@@ -83,9 +83,17 @@ token|VARCHAR(100)|N
     - 过滤非法字符
     - 防止SQL注入，使用MYSQL官方的prepared statement
     
+### 前端请求封装
+1. 对grpc请求做了通用封装
+    
 ### 部署
-使用`docker`封装执行环境，`docker-compose`管理容器。
-服务器端、客户端代码都走的实时源码编译。
+1. 使用`docker`封装执行环境，`docker-compose`管理容器。
+2. 服务器端、客户端代码都走的实时源码编译。
+
+# 不足之处(or todo)
+1. 性能上，如果登录态需要做成单点登录的模式，redis可能会成为mysql的替代方案。
+2. 封装prepared statement参数部分，可以抽象一个工厂类来实现，而不需要每次都手动分配参数内存。
+3. 业务拓展
 
 # 踩坑记录
 https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Questions.md
