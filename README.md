@@ -84,7 +84,8 @@ token|VARCHAR(100)|N
     - 防止SQL注入，使用MYSQL官方的prepared statement
     
 ### 前端请求封装
-1. 对grpc请求做了通用封装
+1. 对grpc请求做了通用封装，详情查看：
+https://github.com/Calvin-cn/grpc-demo/blob/master/docs/Request.md
     
 ### 部署
 1. 使用`docker`封装执行环境，`docker-compose`管理容器。
