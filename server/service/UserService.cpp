@@ -31,7 +31,6 @@ Status UserService::Login(ServerContext *context, const LoginRequest *request, L
     reply->set_ret_code(1);
     return Status::OK;
   }
-  return Status::OK;
 }
 
 Status UserService::CheckLogin(ServerContext *context, const CheckLoginRequest *request, CheckLoginResponse *reply) {
